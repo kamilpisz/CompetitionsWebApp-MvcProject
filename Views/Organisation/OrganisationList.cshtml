@@ -1,0 +1,74 @@
+﻿@model OrganisationListVM
+
+<h1> Lista Organisationów  </h1>
+
+<br />
+<br />
+<div class="fa-header">
+    <h3> Create new  Organisations</h3>
+    <a asp-action="OrganisationCreate" class="btn btn-primary">Create </a>
+
+</div>
+
+
+
+<div>
+
+    <div class="fa-search">
+        <form asp-controller="Organisation" asp-action="OrganisationList" method="get">
+            <select asp-for="OrganisationCategory" asp-items="Model.Categories">
+                <option value="">All</option>
+            </select>
+            <input type="text" name="searchString" />
+            <button class="btn btn-primary" id="searchBtn">Search</button>
+            <a class="btn btn-secondary" asp-controller="Organisation" asp-action="OrganisationList" >Back to default list</a>
+        </form>
+
+    </div>  <!--<table id="dtBasicExample" class="table table-bordered table-sortable">-->
+    
+    <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0"
+           role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+        <caption>
+            <code>table.table-sortable</code>
+        </caption>
+        <tr>
+            <!--Tutaj jest sortowanie -->
+            <th class="th-sm"> <a asp-action="OrganisationList" asp-route-sorting="@ViewData["idSortdir"]">Id</a></th>
+            <th class="th-sm"><a asp-action="OrganisationList" asp-route-sorting="@ViewData["fnSortdir"]">Name </a></th>
+            <th class="th-sm"><a asp-action="OrganisationList" asp-route-sorting="@ViewData["catSortdir"]">Category</a></th>
+
+            <th class="text-center">Address</th>
+            <th class="text-center">Email</th>
+            <th class="text-center">PhoneNumber</th>
+            <th class="text-center">Actions</th>
+        </tr>
+        @{
+            foreach (var item in Model.Organisations)
+            {
+                <tr>
+
+                    <td class="text-left">@item.OrganisationId</td>
+                    <td class="text-left">@item.Name</td>
+                    <td class="text-left">@item.Category</td>
+
+                    <td class="text-left">@item.Address</td>
+                    <td class="text-left">@item.Email</td>
+                    <td class="text-left">@item.PhoneNumber</td>
+                    
+                    <div class="card-footer text-center">
+                        <td class="text-left">
+                            <a asp-action="Details" asp-route-id="@item.OrganisationId" class="btn btn-primary">View</a>
+                            <a asp-action="Edit" asp-route-id="@item.OrganisationId" class="btn btn-primary">Edit</a>
+                            <a href="./Delete/@item.OrganisationId" class="btn btn-danger">Delete</a>
+
+                        </td>
+                    </div>
+
+                </tr>
+
+
+            }
+
+        }
+    </table>
+</div>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AplikacjaASPNET.Models;
+using AplikacjaASPNET.Models.OrganisationItems;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -38,6 +39,7 @@ namespace AplikacjaASPNET
             services.AddRazorPages();
             services.AddScoped<IStudentRepository, SQLStudentRepository>();
             services.AddScoped<ICompetitionRepository, SQLKonkursRepository>();
+            services.AddScoped<ISQLOrganisationRepository, SQLOrganisationRepository>();
 
             var databaseSection = Configuration.GetSection("Database");
             var databaseSettings = databaseSection.Get<DatabaseSettings>();

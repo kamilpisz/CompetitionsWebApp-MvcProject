@@ -3,14 +3,16 @@ using AplikacjaASPNET.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AplikacjaASPNET.Migrations.AppDbContextSQLServerMigrations
 {
     [DbContext(typeof(dbSQLServer))]
-    partial class AppDbContextSQLServerModelSnapshot : ModelSnapshot
+    [Migration("20200803205627_doan organizacji")]
+    partial class doanorganizacji
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

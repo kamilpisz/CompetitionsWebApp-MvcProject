@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AplikacjaASPNET.Models.OrganisationItems;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +29,7 @@ namespace AplikacjaASPNET.Models
         public DbSet<Student> StudentDB { get; set; }
         public DbSet<Competition> CompetitionDB { get; set; }
         public DbSet<CompetitionStudents> CompetitionStudentsDB { get; set; }
+        public DbSet<Organisation> OrganisationDB { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
