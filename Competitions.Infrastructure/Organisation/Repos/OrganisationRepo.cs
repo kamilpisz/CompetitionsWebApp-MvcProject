@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 
 namespace AplikacjaASPNET.Models.OrganisationItems
 {
-    public class SQLOrganisationRepository : ISQLOrganisationRepository
+    public class OrganisationRepo : ISQLOrganisationRepository
     {
         private readonly AppDbContext context;
 
-        public SQLOrganisationRepository(AppDbContext context)
+        public OrganisationRepo(AppDbContext context)
         {
             this.context = context;
         }

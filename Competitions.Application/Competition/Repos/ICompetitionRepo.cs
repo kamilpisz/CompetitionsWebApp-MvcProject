@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AplikacjaASPNET.Models
 {
-    public interface ICompetitionRepository
+    public interface ICompetitionRepo
     {
         
         

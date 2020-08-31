@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace AplikacjaASPNET.Models
 {
     
-        public interface IStudentRepository
+        public interface IParticipantRepo
         {
             Student GetById(int id);
             IEnumerable<Student> GetAllStudent();

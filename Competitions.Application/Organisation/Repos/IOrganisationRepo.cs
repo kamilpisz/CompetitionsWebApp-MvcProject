@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace AplikacjaASPNET.Models.OrganisationItems
 {
-    public interface ISQLOrganisationRepository
+    public interface IOrganisationRepo
     {
         Organisation GetById(int id);
         IEnumerable<Organisation> GetAllOrganisation();

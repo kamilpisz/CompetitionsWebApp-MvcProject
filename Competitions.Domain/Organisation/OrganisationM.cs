@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 
-namespace AplikacjaASPNET.Models.OrganisationItems
+namespace Competitions.Domain.Organisation
 {
-    public class Organisation
+    public class OrganisationM
     {
         public int OrganisationId { get; set; }
         [Required]
@@ -18,7 +17,7 @@ namespace AplikacjaASPNET.Models.OrganisationItems
         [Required]
         public string PhoneNumber { get; set; }
         public string Description { get; set; }
-     
+
 
     }
 }

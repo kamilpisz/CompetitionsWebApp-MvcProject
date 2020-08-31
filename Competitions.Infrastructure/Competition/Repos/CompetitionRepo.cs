@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace AplikacjaASPNET.Models
 {
-    public class SQLKonkursRepository : ICompetitionRepository
+    public class CompetitionRepo : ICompetitionRepository
     {
         public AppDbContext _context;
         public Competition Create(Competition NewCompetition)
@@ -14,7 +14,7 @@ namespace AplikacjaASPNET.Models
             _context.SaveChanges();
             return NewCompetition;
         }
-        public SQLKonkursRepository(AppDbContext context)
+        public CompetitionRepo(AppDbContext context)
         {
             this._context = context;
         }

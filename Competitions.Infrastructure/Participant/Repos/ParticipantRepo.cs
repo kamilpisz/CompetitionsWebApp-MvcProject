@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 
 namespace AplikacjaASPNET.Models
 {
-    public class SQLStudentRepository : IStudentRepository
+    public class ParticipantRepo : IStudentRepository
     {
         private readonly AppDbContext context;
 
-        public SQLStudentRepository(AppDbContext context)
+        public ParticipantRepo(AppDbContext context)
         {
             this.context = context;
         }
