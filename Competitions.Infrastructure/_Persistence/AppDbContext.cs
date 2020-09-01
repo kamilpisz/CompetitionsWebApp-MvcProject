@@ -25,10 +25,10 @@ namespace Competitions.Infrastructure._Persistence
         {
         }
 
-        public DbSet<Participant> ParticipantDB { get; set; }
-        public DbSet<Competition> CompetitionDB { get; set; }
-        public DbSet<CompetitionParticipants> CompetitionParticipantsDB { get; set; }
-        public DbSet<Organisation> OrganisationDB { get; set; }
+        public DbSet<ParticipantM> ParticipantDB { get; set; }
+        public DbSet<CompetitionM> CompetitionDB { get; set; }
+        //public DbSet<CompetitionParticipants> CompetitionParticipantsDB { get; set; }
+        public DbSet<OrganisationM> OrganisationDB { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -50,8 +50,8 @@ namespace Competitions.Infrastructure._Persistence
         {
 
 
-            modelBuilder.Entity<CompetitionParticipants>()
-                            .HasKey(sc => new { sc.ParticipantId, sc.CompetitionId });
+            //modelBuilder.Entity<CompetitionParticipants>()
+                            //.HasKey(sc => new { sc.ParticipantId, sc.CompetitionId });
 
 
         }

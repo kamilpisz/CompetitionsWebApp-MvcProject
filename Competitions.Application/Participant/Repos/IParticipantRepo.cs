@@ -1,20 +1,13 @@
-﻿using System;
+﻿using Competitions.Application._Common;
+using Competitions.Domain.Participant;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace AplikacjaASPNET.Models
+namespace Competitions.Application.Participant.Repos
 {
-    
-        public interface IParticipantRepo
-        {
-            Student GetById(int id);
-            IEnumerable<Student> GetAllStudent();
-            Student Edit(Student EditStudent);
-            Student Delete(int id);
-            Student Create(Student nowyStudent);
-            IQueryable<string> GetAllClasses();
 
-        }
-    
+    public interface IParticipantRepo : IRepositoryTemplate<ParticipantM> { }
+
 }

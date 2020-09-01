@@ -1,11 +1,12 @@
-﻿using System;
+﻿using Competitions.Domain._Common;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace Competitions.Domain.Organisation
 {
-    public class OrganisationM
+    public class OrganisationM : EntityBaseM
     {
         public int OrganisationId { get; set; }
         [Required]

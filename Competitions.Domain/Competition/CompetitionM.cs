@@ -6,10 +6,9 @@ using Competitions.Domain.Competition.Enums;
 
 namespace Competitions.Domain.Competition
 {
-    class CompetitionM : EntityBaseM
+    public class CompetitionM : EntityBaseM
     {
-        public class Competition
-        {
+       
             public int Id { get; set; }
             public string Name { get; set; }
             public CompetitionCategoryE Category { get; set; }
@@ -19,11 +18,11 @@ namespace Competitions.Domain.Competition
             //public virtual ICollection<CompetitionParticipations> CompetitionParticipations { get; set; }
 
 
-            public Competition()
+            public CompetitionM()
             {
 
             }
 
-        }
+        
     }
 }

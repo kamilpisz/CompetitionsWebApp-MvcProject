@@ -1,67 +1,21 @@
-﻿using System;
+﻿
+using Competitions.Domain.Participant;
+using Competitions.Infrastructure._Persistence;
+using Competitions.Infrastructure.Base;
+using Competitions.Application.Participant.Repos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace AplikacjaASPNET.Models
+namespace Competitions.Infrastructure.Participant.Repos
 {
-    public class ParticipantRepo : IStudentRepository
+    public class ParticipantRepo : RepositoryTemplate<ParticipantM>, IParticipantRepo
     {
-        private readonly AppDbContext context;
-
-        public ParticipantRepo(AppDbContext context)
+        public ParticipantRepo(AppDbContext db) : base(db)
         {
-            this.context = context;
-        }
-
-
-
-        public Student Create(Student nowyStudent)
-        {
-            context.StudentDB.Add(nowyStudent);
-            context.SaveChanges();
-            return nowyStudent;
 
         }
-
-        public Student Delete(int id)
-        {
-            Student Student = context.StudentDB.Find(id);
-            if (Student != null)
-            {
-                context.StudentDB.Remove(Student);
-                context.SaveChanges();
-
-            }
-            return Student;
-        }
-
-        public Student Edit(Student EditStudent)
-        {
-            var Student = context.StudentDB.Attach(EditStudent);
-            Student.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-            context.SaveChanges();
-            return EditStudent;
-        }
-
-        public IEnumerable<Student> GetAllStudent()
-        {
-            return context.StudentDB;
-        }
-
-        public Student GetById(int id)
-        {
-            return context.StudentDB.Find(id);
-        }
-
-        public IQueryable<string> GetAllClasses()
-        {
-            var classes = context.StudentDB.Select(x => x.ClassCode);
-            return classes;
-        }
-        
-
-
     }
 }
 

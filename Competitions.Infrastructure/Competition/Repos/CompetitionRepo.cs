@@ -1,58 +1,19 @@
-﻿using System;
+﻿using Competitions.Application.Competition.Repos;
+using Competitions.Domain.Competition;
+using Competitions.Infrastructure._Persistence;
+using Competitions.Infrastructure.Base;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace AplikacjaASPNET.Models
+namespace Competitions.Infrastructure.Competition.Repos
 {
-    public class CompetitionRepo : ICompetitionRepository
+    public class CompetitionRepo : RepositoryTemplate<CompetitionM>, ICompetitionRepo
     {
-        public AppDbContext _context;
-        public Competition Create(Competition NewCompetition)
+        public CompetitionRepo(AppDbContext db) : base(db)
         {
-            _context.CompetitionDB.Add(NewCompetition);
-            _context.SaveChanges();
-            return NewCompetition;
-        }
-        public CompetitionRepo(AppDbContext context)
-        {
-            this._context = context;
-        }
 
-        public Competition Delete(int id)
-        {
-            Competition competition = _context.CompetitionDB.Find(id);
-            if (competition != null)
-            {
-                _context.CompetitionDB.Remove(competition);
-                _context.SaveChanges();
-
-            }
-            return competition;
-        }
-
-
-        public Competition Edit(Competition EditCompetition)
-        {
-            var competition = _context.CompetitionDB.Attach(EditCompetition);
-            competition.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-            _context.SaveChanges();
-            return EditCompetition;
-        }
-
-        public IEnumerable<Competition> GetAllCompetition()
-        {
-            return _context.CompetitionDB;
-        }
-
-        public IQueryable<string> GetAllEnumCategory()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Competition GetById(int id)
-        {
-            return _context.CompetitionDB.Find(id);
         }
     }
 }

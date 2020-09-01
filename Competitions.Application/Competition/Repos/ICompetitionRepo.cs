@@ -1,25 +1,13 @@
-﻿using AplikacjaASPNET.Models.Konkurs;
+﻿
+using Competitions.Application._Common;
+using Competitions.Domain.Competition;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 
-namespace AplikacjaASPNET.Models
+namespace Competitions.Application.Competition.Repos
 {
-    public interface ICompetitionRepo
-    {
-        
-        
-            Competition GetById(int id);
-            IEnumerable<Competition> GetAllCompetition();
-            Competition Edit(Competition EditCompetition);
-            Competition Delete(int id);
-            Competition Create(Competition NewCompetition);
-            IQueryable<string> GetAllEnumCategory();
-
-        
-
-    }
-
+    public interface ICompetitionRepo : IRepositoryTemplate<CompetitionM> { }
 }

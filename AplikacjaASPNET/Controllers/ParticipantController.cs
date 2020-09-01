@@ -13,36 +13,36 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace AplikacjaASPNET.Controllers
 {
-    public class HomeController : Controller
+    public class ParticipantController : Controller
     {
-        private readonly IStudentRepository _StudentRepository;
+        private readonly IParticipantRepository _ParticipantRepository;
         private readonly AppDbContext _context;
 
 
-        public HomeController(IStudentRepository StudentRepository, AppDbContext context)
+        public ParticipantController(IParticipantRepository ParticipantRepository, AppDbContext context)
         {
-            _StudentRepository = StudentRepository;
+            _ParticipantRepository = ParticipantRepository;
             _context = context;
 
         }
-        [Route("")]
-        [Route("Home")]
-        [Route("Home/Index")]
+        
+        [Route("Participant")]
+        [Route("Participant/Index")]
         public ViewResult Index()
         {
             return View();
         }
-        public IActionResult StudentList(string searchString, string studentClassCodes, string sorting)
+        public IActionResult ParticipantList(string searchString, string ParticipantClassCodes, string sorting)
         {
             ViewData["fnSortdir"] = sorting == "FirstName" ? "FirstName_desc" : "FirstName";
             ViewData["idSortdir"] = sorting == "Id" ? "Id_desc" : "Id";
             ViewData["ccodeSortdir"] = sorting == "ClassCode" ? "ClassCode_desc" : "ClassCode";
 
-            var query = _context.StudentDB.AsQueryable();
+            var query = _context.ParticipantDB.AsQueryable();
             
 
-            if (!string.IsNullOrEmpty(studentClassCodes))
-                query = query.Where(a => a.ClassCode == studentClassCodes);
+            if (!string.IsNullOrEmpty(ParticipantClassCodes))
+                query = query.Where(a => a.ClassCode == ParticipantClassCodes);
             if (!string.IsNullOrEmpty(searchString))
                 query = query.Where(a => a.FirstName.Contains(searchString) || a.Email.Contains(searchString));
 
@@ -75,18 +75,18 @@ namespace AplikacjaASPNET.Controllers
             //
 
 
-            IQueryable<string> classCodesQuery = _StudentRepository.GetAllClasses();
+            IQueryable<string> classCodesQuery = _ParticipantRepository.GetAllClasses();
             
             
 
-            var StudentClassCodeVM = new StudentClassCodeViewModel()
+            var ParticipantClassCodeVM = new ParticipantClassCodeViewModel()
             {
                 classCodes = new SelectList(classCodesQuery.Distinct()),
-                Students = query.ToList()
+                Participants = query.ToList()
             };
 
 
-            return View(StudentClassCodeVM);
+            return View(ParticipantClassCodeVM);
 
         }
 
@@ -95,10 +95,10 @@ namespace AplikacjaASPNET.Controllers
 
 
 
-            Student student = _StudentRepository.GetById(id ?? 1);
+            Participant Participant = _ParticipantRepository.GetById(id ?? 1);
                
             
-            return View(student);
+            return View(Participant);
 
         }
 
@@ -108,57 +108,57 @@ namespace AplikacjaASPNET.Controllers
         }
 
         [HttpGet]
-        [Route("Home/Create")]
+        [Route("Participant/Create")]
         public ViewResult Create()
         {
             
             return View();
         }
         [HttpPost]
-        [Route("Home/Create")]
-        public IActionResult Create(Student nowyStudent)
+        [Route("Participant/Create")]
+        public IActionResult Create(Participant nowyParticipant)
         {
             if (ModelState.IsValid)
             {
-                Student newemploye = _StudentRepository.Create(nowyStudent);
+                Participant newemploye = _ParticipantRepository.Create(nowyParticipant);
                 return RedirectToAction("details", new { id = newemploye.Id });
             }
             return View();
         }
         public IActionResult Delete(int id)
         {
-            _StudentRepository.Delete(id);
-            return RedirectToAction("StudentList");
+            _ParticipantRepository.Delete(id);
+            return RedirectToAction("ParticipantList");
 
         }
 
         [HttpGet]
         public ViewResult Edit(int id)
         {
-            Student student = _StudentRepository.GetById(id);
-            StudentEditViewModel studentEditViewModel = new StudentEditViewModel()
+            Participant Participant = _ParticipantRepository.GetById(id);
+            ParticipantEditViewModel ParticipantEditViewModel = new ParticipantEditViewModel()
             {
-                Id = student.Id,
-                FirstName = student.FirstName,
-                LastName = student.LastName,
-                ClassCode = student.ClassCode,
-                Email = student.Email,
+                Id = Participant.Id,
+                FirstName = Participant.FirstName,
+                LastName = Participant.LastName,
+                ClassCode = Participant.ClassCode,
+                Email = Participant.Email,
             };
 
-            return View(studentEditViewModel);
+            return View(ParticipantEditViewModel);
         }
         [HttpPost]
-        public IActionResult Edit(StudentEditViewModel model)
+        public IActionResult Edit(ParticipantEditViewModel model)
         {
             if (ModelState.IsValid)
             {
-                Student student = _StudentRepository.GetById(model.Id);
+                Participant Participant = _ParticipantRepository.GetById(model.Id);
 
-                student.FirstName = model.FirstName;
-                student.LastName = model.LastName;
-                student.ClassCode = model.ClassCode;
-                student.Email = model.Email;
-                _StudentRepository.Edit(student);
+                Participant.FirstName = model.FirstName;
+                Participant.LastName = model.LastName;
+                Participant.ClassCode = model.ClassCode;
+                Participant.Email = model.Email;
+                _ParticipantRepository.Edit(Participant);
                 return RedirectToAction("Details", new { id = model.Id });
             }
             return View(model);

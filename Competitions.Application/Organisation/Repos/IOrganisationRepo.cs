@@ -1,18 +1,11 @@
-﻿using System;
+﻿using Competitions.Application._Common;
+using Competitions.Domain.Organisation;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace AplikacjaASPNET.Models.OrganisationItems
+namespace Competitions.Application.Organisation.Repos
 {
-    public interface IOrganisationRepo
-    {
-        Organisation GetById(int id);
-        IEnumerable<Organisation> GetAllOrganisation();
-        Organisation Edit(Organisation EditOrganisation);
-        Organisation Delete(int id);
-        Organisation Create(Organisation nowyOrganisation);
-        IQueryable<string> GetAllCategories();
-
-    }
+    public interface IOrganisationRepo : IRepositoryTemplate<OrganisationM> { }
 }
