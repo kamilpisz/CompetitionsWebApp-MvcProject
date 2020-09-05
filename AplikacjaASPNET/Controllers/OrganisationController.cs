@@ -2,24 +2,30 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using AplikacjaASPNET.Models;
-using AplikacjaASPNET.Models.OrganisationItems;
+
 using AplikacjaASPNET.Views.ViewModels.OrganisationVM;
+using AplikacjaASPNET.Views.ViewModels.OrganisationVM;
+using AutoMapper;
+using Competitions.Domain.Organisation;
+using Competitions.Infrastructure._Persistence;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace AplikacjaASPNET.Controllers
 {
+    [Route("/Organisation")]
     public class OrganisationController : Controller
     {
-        private readonly ISQLOrganisationRepository _OrganisationRepository;
+        
         private readonly AppDbContext _context;
+        private readonly IMapper _mapper;
 
 
-        public OrganisationController(ISQLOrganisationRepository OrganisationRepository, AppDbContext context)
+        public OrganisationController(AppDbContext context, IMapper mapper)
         {
-            _OrganisationRepository = OrganisationRepository;
+            
             _context = context;
+            _mapper = mapper;
 
         }
         
@@ -74,7 +80,7 @@ namespace AplikacjaASPNET.Controllers
             
 
 
-            IQueryable<string> CategoriesQuery = _OrganisationRepository.GetAllCategories();
+            IQueryable<string> CategoriesQuery = _context.GetAllCategories();
 
 
 
@@ -94,7 +100,7 @@ namespace AplikacjaASPNET.Controllers
 
 
 
-            Organisation Organisation = _OrganisationRepository.GetById(id ?? 1);
+            OrganisationM Organisation = _context.GetById(id ?? 1);
 
 
             return View(Organisation);
@@ -115,18 +121,18 @@ namespace AplikacjaASPNET.Controllers
         }
         [HttpPost]
         
-        public IActionResult OrganisationCreate(Organisation nowyOrganisation)
+        public IActionResult OrganisationCreate(OrganisationM nowyOrganisation)
         {
             if (ModelState.IsValid)
             {
-                Organisation newemploye = _OrganisationRepository.Create(nowyOrganisation);
+                Organisation newemploye = _context.Create(nowyOrganisation);
                 return RedirectToAction("details", new { id = newemploye.OrganisationId });
             }
             return View();
         }
         public IActionResult Delete(int id)
         {
-            _OrganisationRepository.Delete(id);
+            _context.Delete(id);
             return RedirectToAction("OrganisationList");
 
         }
@@ -134,16 +140,10 @@ namespace AplikacjaASPNET.Controllers
         [HttpGet]
         public ViewResult OrganisationEdit(int id)
         {
-            Organisation Organisation = _OrganisationRepository.GetById(id);
+            Organisation Organisation = _context.GetById(id);
             OrganisationEditVM OrganisationEditViewModel = new OrganisationEditVM()
             {
-                OrganisationId = Organisation.OrganisationId,
-                Name = Organisation.Name,
-                Category = Organisation.Category,
-                Address = Organisation.Address,
-                Email = Organisation.Email,
-                PhoneNumber = Organisation.PhoneNumber,
-                Description = Organisation.Description,
+                
                 
             };
 
@@ -154,15 +154,10 @@ namespace AplikacjaASPNET.Controllers
         {
             if (ModelState.IsValid)
             {
-                Organisation Organisation = _OrganisationRepository.GetById(model.Id);
+                OrganisationM Organisation = _context.GetById(model.Id);
 
-                Organisation.Name = model.Name;
-                Organisation.Category = model.Category;
-                Organisation.Address = model.Address;
-                Organisation.Email = model.Email;
-                Organisation.PhoneNumber = model.PhoneNumber;
-                Organisation.Description = model.Description;
-                _OrganisationRepository.Edit(Organisation);
+                
+                _context.Edit(Organisation);
                 return RedirectToAction("Details", new { id = model.Id });
             }
             return View(model);

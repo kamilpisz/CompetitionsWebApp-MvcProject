@@ -10,13 +10,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Competition\DTO\" />
-    <Folder Include="Organisation\DTO\" />
-    <Folder Include="Participant\DTO\" />
-    <Folder Include="_Mappings\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Competitions.Domain\Competitions.Domain.csproj" />
   </ItemGroup>
 

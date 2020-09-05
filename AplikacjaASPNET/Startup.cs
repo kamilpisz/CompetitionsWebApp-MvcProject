@@ -2,8 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using AplikacjaASPNET.Models;
-using AplikacjaASPNET.Models.OrganisationItems;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -11,6 +10,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Competitions.Application._Mappings;
+
+
 
 namespace AplikacjaASPNET
 { 
@@ -37,6 +39,8 @@ namespace AplikacjaASPNET
             
             services.AddMvc();
             services.AddRazorPages();
+            services.AddAutoMapper(typeof(AutoMapperProfile));
+
             services.AddScoped<IStudentRepository, SQLStudentRepository>();
             services.AddScoped<ICompetitionRepository, SQLKonkursRepository>();
             services.AddScoped<ISQLOrganisationRepository, SQLOrganisationRepository>();

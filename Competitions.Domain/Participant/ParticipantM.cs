@@ -10,11 +10,11 @@ namespace Competitions.Domain.Participant
     {
         
         public string FirstName { get; set; }
-        [Required]
+      
         public string LastName { get; set; }
-        [Required]
+       
         public string ClassCode { get; set; }
-        [Required]
+        
         public string Email { get; set; }
 
         //public virtual ICollection<CompetitionParticipations> CompetitionParticipations { get; set; }
